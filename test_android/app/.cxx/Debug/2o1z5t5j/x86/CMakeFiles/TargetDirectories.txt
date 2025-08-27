@@ -1,0 +1,2 @@
+/Users/binarybards/Documents/Projects/boolbi_app/android/app/.cxx/Debug/2o1z5t5j/x86/CMakeFiles/edit_cache.dir
+/Users/binarybards/Documents/Projects/boolbi_app/android/app/.cxx/Debug/2o1z5t5j/x86/CMakeFiles/rebuild_cache.dir

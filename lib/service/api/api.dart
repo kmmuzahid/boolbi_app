@@ -1,0 +1,116 @@
+import 'dart:developer';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../../const/api_url/api_url.dart';
+import '../../const/storage/get_storage.dart';
+import '../../routes/app_routes.dart';
+import '../../widgets/app_snack_bar/app_snack_bar.dart';
+
+class AppApi {
+  final Dio _dio = Dio();
+
+  AppApi() {
+    _dio.options.baseUrl = AppApiUrl.baseUrl;
+    _dio.options.sendTimeout = const Duration(seconds: 120);
+    _dio.options.connectTimeout = const Duration(seconds: 120);
+    _dio.options.receiveTimeout = const Duration(seconds: 120);
+    _dio.options.followRedirects = false;
+
+    _dio.interceptors.addAll({
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          options.baseUrl = AppApiUrl.baseUrl;
+          options.contentType = 'application/json';
+          options.headers["Accept"] = "application/json";
+
+          String? token = AppStorage().getToken();
+          if (token != null) {
+            options.headers["Authorization"] = "Bearer $token";
+          }
+
+          return handler.next(options); // Continue request
+        },
+        onError: (error, handler) async {
+          log("API error occurred:");
+          log("Status code: ${error.response?.statusCode}");
+          log("Error message: ${error.message}");
+
+          if (error.response?.statusCode == 401) {
+            // Unauthorized error, attempt token refresh
+            final newAccessToken = await reFreshNewAccessToken();
+
+            if (newAccessToken != null) {
+              // Update the request with the new token and retry
+              _dio.options.headers["Authorization"] = "Bearer $newAccessToken";
+              return handler.resolve(await _dio.fetch(error.requestOptions));
+            } else {
+              // Token refresh failed, clear storage and redirect to login
+              AppSnackBar.error("Sign in again!");
+              AppStorage().removeValue(StorageKey.token);
+              // AppStorage().removeValue(StorageKey.loginValue);
+              // AppAuthStorage().storageAllClear();
+              Get.offAllNamed(AppRoutes.signIn);
+              return handler.next(error);
+            }
+          }
+
+          return handler.next(error); // Continue with error
+        },
+      ),
+      if (kDebugMode)
+        PrettyDioLogger(
+          requestHeader: true,
+          request: true,
+          compact: true,
+          error: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
+    });
+  }
+
+  // Token refresh logic
+
+  Dio get sendRequest => _dio;
+}
+
+Future<String?> reFreshNewAccessToken() async {
+  try {
+    String? token = AppStorage().getRefreshToken();
+
+    if (token != null) {
+      final response = await Dio().post(AppApiUrl.token,
+          // options: Options(headers: {"Authorization": "Bearer $token"}),
+
+          data: {
+            "refreshToken": token
+          });
+      if (response.statusCode == 200) {
+        String? newAccessToken = response.data["data"]["accessToken"];
+
+        if (newAccessToken != null) {
+          // Store new token
+          await AppStorage().setToken(newAccessToken);
+
+          return newAccessToken;
+        }
+      } else {
+        return null;
+      }
+    }
+  } on DioException catch (e) {
+    log("Token refresh failed: $e");
+    AppStorage().removeValue(StorageKey.token);
+    Get.offAllNamed(AppRoutes.signIn);
+  } catch (e) {
+    log("Token refresh failed: $e");
+    AppStorage().removeValue(StorageKey.token);
+    Get.offAllNamed(AppRoutes.signIn);
+  }
+
+  return null;
+}

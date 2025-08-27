@@ -1,0 +1,473 @@
+import 'package:boolbi_app/const/images/app_asset_images.dart';
+import 'package:boolbi_app/const/uitls/app_colors.dart';
+import 'package:boolbi_app/routes/app_routes.dart';
+import 'package:boolbi_app/screens/provider_running_project_order_status_details_screen/controllers/provider_running_project_order_status_details_screen_controller.dart';
+import 'package:boolbi_app/utils/app_size.dart';
+import 'package:boolbi_app/utils/gap.dart';
+import 'package:boolbi_app/widgets/app_image/app_image.dart';
+import 'package:boolbi_app/widgets/texts/app_text.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../widgets/custom_appbar/user_custom_appbar.dart';
+
+class ProviderRunningProjectOrderStatusDetailsScreen extends StatelessWidget {
+  const ProviderRunningProjectOrderStatusDetailsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder(
+        init: ProviderRunningProjectOrderStatusDetailsScreenController(),
+        builder: (controller) {
+          return Scaffold(
+            backgroundColor: AppColors.primaryBackgroud,
+            appBar: customerCustomAppBar(title: "View Details"),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Container(
+                  //   alignment: Alignment.topRight,
+                  //   margin: const EdgeInsets.all(20),
+                  //   height: 250,
+                  //   width: AppSize.size.width,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       image: const DecorationImage(
+                  //           fit: BoxFit.fill,
+                  //           image: AssetImage(
+                  //             AssetsImagesPath.demoImage2,
+                  //           ))),
+                  //   child: Container(
+                  //     height: 50,
+                  //     width: 130,
+                  //     // padding:
+                  //     //     EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  //     alignment: Alignment.center,
+                  //     decoration: const BoxDecoration(
+                  //         color: AppColors.greenColor,
+                  //         borderRadius: BorderRadius.only(
+                  //             bottomLeft: Radius.circular(10),
+                  //             topRight: Radius.circular(10))),
+                  //     child: const AppText(
+                  //       data: "View Profile",
+                  //       color: AppColors.deepWhte,
+                  //       fontWeight: FontWeight.w600,
+                  //     ),
+                  //   ),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: AppImage(
+                        path: AssetsImagesPath.gardenImg,
+                        // url: item.primary ?? "",
+                        fit: BoxFit.fill,
+                        width: AppSize.size.width,
+                      ),
+                    ),
+                  ),
+                  const Gap(height: 10),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: AppSize.size.width,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 15),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffEDEDEF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: AppText(
+                        data: "Customer Name : Ajay",
+                        color: AppColors.primary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const Gap(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: AppText(
+                            data:
+                                "Garden Maintenance - Lawn Mowing & Hedge Trimming",
+                            color: AppColors.primary,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AppText(
+                                    data: "Category",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: "Sub Category",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: "Location",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: "Project Cost",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: "Deadline",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AppText(
+                                    data: ": Home & Garden",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: ": Garden Maintenance",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: ": Berlin, zehlendrof",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: ": \$1000",
+                                    color: AppColors.greenColorStatus,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Gap(height: 10),
+                                  AppText(
+                                    data: ": 18 August 2025",
+                                    color: AppColors.primary,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: AppSize.size.width,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 15),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffEDEDEF),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const AppText(
+                        data:
+                            "The Total Cost is Outlined Below and includes a 5% service fee charged by Boolbi upon acceptance of the offer.",
+                        color: AppColors.primary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const Gap(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AppText(
+                          data: "Total Project Cost",
+                          color: AppColors.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        Gap(width: 5),
+                        AppText(
+                          data: "\$1050",
+                          color: AppColors.greenColorStatus,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(height: 10),
+
+                  const Gap(height: 20),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: AppText(
+                      data:
+                          "We are looking for a reliable and experienced gardener to perform regular maintenance work in our private garden",
+                      color: AppColors.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Gap(height: 10),
+
+                  // Now bullet points with bold titles
+                  _buildServiceBullet(
+                    "Tasks Include:",
+                    "I conduct comprehensive user research to understand your target audience's needs, behaviors, and pain points. By gathering insights, I ensure the designs are both practical and aligned with user expectations.",
+                  ),
+                  const Gap(height: 10),
+                  _buildServiceBullet(
+                    "Requirements:",
+                    "I build interactive wireframes and prototypes that bring your ideas to life before development. These tools allow stakeholders to visualize the end product early in the design process and provide feedback for iterative improvements.",
+                  ),
+                  const Gap(height: 20),
+                  // Gap(height: 20),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        AppText(
+                          data: "Images :",
+                          color: AppColors.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(height: 20),
+                  SizedBox(
+                    height: 200,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5, // One column (horizontal scroll)
+                          childAspectRatio:
+                              1.0, // Adjust the aspect ratio as needed
+                        ),
+                        // itemCount: controller.localImagePath.length,
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: FittedBox(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: FittedBox(
+                                    child: AppImage(
+                                      isFullScreen: true,
+                                      path: AssetsImagesPath.demoImage,
+
+                                      // filePath: controller
+                                      //     .localImagePath[index],
+                                      width: AppSize.height(value: 60),
+                                      height: AppSize.height(value: 60),
+                                      color: AppColors.primary,
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const Gap(height: 20),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.conversationScreen);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(AppSize.width(value: 5)),
+                            padding: EdgeInsets.all(AppSize.width(value: 5)),
+                            width: Get.width,
+                            height: AppSize.height(value: 50),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.primary,
+                                ),
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(
+                                    AppSize.width(value: 8.0))),
+                            child: const AppText(
+                              data: "Message",
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                        //        GestureDetector(
+                        //           onTap: () {
+                        //             Get.toNamed(AppRoutes.providerUpdateOfferScreen);
+                        //             // Get.closeAllDialogs();
+                        //           },
+                        //           child: Container(
+                        //             margin: EdgeInsets.all(AppSize.width(value: 5)),
+                        //             padding: EdgeInsets.all(AppSize.width(value: 5)),
+                        //             width: Get.width,
+                        //             height: AppSize.height(value: 50),
+                        //             alignment: Alignment.center,
+                        //             decoration: BoxDecoration(
+                        //                 border: Border.all(
+                        //                   color: AppColors.primary,
+                        //                 ),
+                        //                 color: AppColors.white,
+                        //                 borderRadius: BorderRadius.circular(
+                        //                     AppSize.width(value: 8.0))),
+                        //             child: const AppText(
+                        //               data: "Update Offer",
+                        //               fontSize: 18,
+                        //               fontWeight: FontWeight.w700,
+                        //               color: AppColors.primary,
+                        //             ),
+                        //           ),
+                        //         ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes
+                                .providerProjectOrderDetailsMyOfferDetailsScreen);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(AppSize.width(value: 5)),
+                            padding: EdgeInsets.all(AppSize.width(value: 5)),
+                            width: Get.width,
+                            height: AppSize.height(value: 50),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColors.primary),
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.width(value: 8.0),
+                                )),
+                            child: const AppText(
+                              data: "My Offer",
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(height: 20),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
+
+// Helper function for bullet points
+Widget _buildServiceBullet(String title, String description) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AppText(
+          data: "• ",
+          color: AppColors.primary,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppText(
+                data: title,
+                color: AppColors.primary,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+              const Gap(height: 5),
+              AppText(
+                data: description,
+                color: AppColors.primaryWithOpacityW6,
+                fontSize: 15.5,
+                fontWeight: FontWeight.w500,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}

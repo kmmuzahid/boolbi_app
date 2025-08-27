@@ -1,0 +1,2 @@
+/Users/binarybards/Documents/Ajay/Projects/boolbi_app/android/app/.cxx/RelWithDebInfo/115c5q5v/x86/CMakeFiles/edit_cache.dir
+/Users/binarybards/Documents/Ajay/Projects/boolbi_app/android/app/.cxx/RelWithDebInfo/115c5q5v/x86/CMakeFiles/rebuild_cache.dir
